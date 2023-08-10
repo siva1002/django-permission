@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<style>
+    #btn{
+        color:white;
+
+    }
+    .form {
+        float: right;
+        margin-top: 80PX;
+        margin-right: 50px;
+        background-color: rgb(167, 62, 97);
+        color: white;
+        height: 373px;
+        width: 402px;
+        padding-top: 20px;
+        padding-left: 30px;
+        padding-right: 30px;
+        border-radius: 2%;
+    }
+
+
+    .record {
+        margin-left: 850px;
+        margin-top: 100px;
+        margin-bottom: 20px;
+
+    }
+
+    .button {
+        margin-bottom: -20px;
+    }
+
+    table {
+
+        font-family: arial, sans-serif;
+
+        border-collapse: collapse;
+
+        width: 40%;
+
+        margin-left: 468px;
+
+
+        margin-top: 100px;
+
+    }
+
+    td,
+    th {
+
+        border: 1px solid #dddddd;
+
+        text-align: left;
+
+        padding: 8px;
+        padding-left: 30px;
+        height: 50px;
+
+    }
+
+    tr:nth-child(even) {
+
+        background-color: rgb(194, 125, 148);
+
+    }
+
+    .h3 {
+        margin-right: 200px;
+    }
+
+    #s1 {
+        margin-left: 40px;
+    }
+
+    #s2 {
+        margin-left: 290px;
+    }
+
+    #s3 {
+        margin-left: 280px;
+    }
+
+    body {
+        font-family: arial, sans-serif;
+    }
+    input{
+        float:right;
+        margin-bottom: 20px;
+    }
+    label{
+        width:20px;
+        margin-bottom: 50px;
+    }
+    textarea{
+        float: right;
+        resize: none;
+        width:250px;
+        height:100px;
+
+    }
+   
+    a{
+        text-decoration: none;
+        color:white;
+    }
+    a:hover{
+        color:white;
+    }
+    #button{
+        margin-top: 50px;
+        margin-right: -211px;
+    }
+</style>
+</head>
+<body>
+    <h1 align="center">TODO LIST</h1>
+
+    <hr style="height:3px;border-width:0;color:gray;background-color:gray">
+
+    <h3><span class="h3"> No.of.Tasks</span><span class="h3">Completed</span>Processing</h3>
+    <h1><span id="s1">{{count}}</span><span id="s2">{{completed}}</span><span id="s3">{{processing}}</span></h1>
+
+
+
+    <hr style="height:3px;border-width:0;color:gray;background-color:gray">
+    <div class="form">
+        <form method="POST">
+            {% csrf_token %}
+            <!-- Title: <br>{{form.title}}
+            <br>
+            <br>
+            Description:<br>{{form.description}}
+            <br>
+            <br> -->
+        {{form.title}}<br>
+         {{form.description}}<br>
+          {{form.duetime}}<br>
+          <input class="btn btn-light" type="submit" id="button">
+        </form>
+    </div>
+    <table border=1px solid>
+        {% for tasks in task %}
+        <tr>
+            <td>
+                {% if tasks.completed == True %}
+
+                <br><strike class="strike">{{tasks}}{{tasks.created}}</strike><br>
+
+                 {% elif tasks.consumed_time >= tasks.duetime %}
+
+                 <p style="color:red">{{tasks}}</p><br>
+                 <p style="color:red">Description:&nbsp;{{tasks.description}}</p><br>
+
+                 {% else %}
+                <h3>Task:&nbsp;{{tasks.title}}</h3>
+                <p>Description:&nbsp;{{tasks.description}}</p>
+                {% endif %}
+                <button class="btn btn-primary" style="color:white"><a href="{% url 'update_task' tasks.id %}">update</a></button>
+                <button class="btn btn-dark"><a href="{% url 'delete_task' tasks.id  %}">delete</a></button>
+               
+               
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+
+
+</body>
+
+</html>

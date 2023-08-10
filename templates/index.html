@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <style>
+            .box {
+                background-color: rgb(77, 164, 214);
+                margin-left: 700px;
+                margin-top: 250px;
+                height: 400px;
+                width: 32%;
+                border-radius: 2%;
+               padding: 3% 3%;
+            }
+        
+            input {
+               margin-top: 30px;
+               float: right;
+            }
+        
+            label {
+                color:white;
+                float: left;
+                width:150px;
+                margin-top: 35px;
+            
+        
+            }
+        
+            button {
+                margin-top: 70px;
+                float: right;
+                color: white;
+                margin-right: -150px;
+            }
+            a{
+                color:white;
+                text-decoration: none;
+            }
+            a:hover{
+                color:white;
+            }
+            .signin{
+                margin-left: 254px;
+                margin-top: 257px;
+                position: absolute;
+                color: black;
+            }
+        </style>
+</head>
+
+
+
+<body>
+    <div class="box">
+        <!-- <h1>HI</h1> -->
+        <div >
+        <form action="{% url 'signup' %}" method="POST">
+            {% csrf_token %}
+           
+            <label> Username</label><input type="text" name="username">
+            <label> Email</label><input type="email" name="email">
+            <label> Password</label><input type="password" name="password">
+            <label> Re-Enter Password</label><input type="password" name="password2">
+            <button type="submit" class="btn btn-primary">submit</button>
+        </form>
+       
+        </div>
+        <a href="/signin" class="signin">signin...<a>
+    </div>
+</body>
+
+</html>
